@@ -1,0 +1,31 @@
+We are creating a multi-tier architecture by using a Wordpress image (Front end) and mysql image (Back end).
+As wordpress requires a database to collect and store its records therefore wordpress and mysql provide us a two tier architechure.
+
+IMAGE FOR MYSQL:
+    >> docker pull mysql:5.7
+IMAGE FOR WORDPRESS:
+    >> docker pull wordpress:5.1.1-php7.3-apache
+--------------------------------------------------------------------------------------------------------------------------------    
+ENVIRONMENTAL VARIABLES:
+Some containers require to be passed with some data before running them. This data is called Environmental Variable.
+Without passing the environmental variable the container will fail to start.
+mysql and wordpress also require such environmental variable.
+We use -e for providing rnvironmental variable.
+
+--------------------------------------------------------------------------------------------------------------------------------
+STORAGE/VOLUME:
+The data stored in a container is ephemeral(temporary). So, in case our container crashes or is removed our data is also lost.
+Therefore the best way is to connect the storage with an external drive (which is called mounting) so that we do not lose data.
+
+for that we need to create a volume(which is like an external storage device)
+    >> docker volume create <volume_name>
+Now this volume is persistent and we will not lose the data.
+
+So we creating two volumes for our two containers.
+    >> docker volume create mysql_storage
+    >> docker volume create wp_storage
+And we can mount these volume to the containers using -v in docker run command
+
+--------------------------------------------------------------------------------------------------------------------------------
+NOW WE WILL USE DOCKER RUN COMMAND TO RUN A MYSQL CONTAINER,
+    >> docker run -itd -e MYSQL_PASSWORD=  -e MYSQL_USER=  -e MYSQL_PASSWORD=  -e MYSQL_DATABASE=  
