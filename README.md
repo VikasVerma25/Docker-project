@@ -6,10 +6,10 @@ In multi-tier architecture the software is engineered to have the processing, da
 We will start and understand from the simple docker container run command to build the architecture by linking different docker containers and then we will move to the next part of managing infrastructure using docker compose.
 
 # Things we will do
-> Docker info: 
+> Docker intro: 
   We will know the basic knowledge of docker images, containers and commands to work with them.
   
-> Creating Volume and Architecture:
+> Creating Storage and Architecture:
   We will know about volume, environmental variable, linking containers, will manually create the infrastruture using docker run
   command and will understand every part of the command.
   
