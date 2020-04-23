@@ -1,2 +1,77 @@
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 First you should have donloaded the images of wordpress and mysql
+IMAGE FOR MYSQL:
+    >> docker pull mysql:5.7
+IMAGE FOR WORDPRESS:
+    >> docker pull wordpress:5.1.1-php7.3-apache
+    
+Now install docker-compose,
+1) Run this command to download the current stable release of Docker Compose:
+curl -L "https://github.com/docker/compose/releases/download/1.25.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+2) Apply executable permissions to the binary:
+chmod +x /usr/local/bin/docker-compose
+
+create any directory, 
+  mkdir /mycompose  (also called workspace)
+
+move into the directory,
+  cd /mycopose/
+
+create and edit a docker-compose.yml file here,
+  vim docker-compose.yml
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+version: '3'                  //provide the version of docker-compose
+services:
+  dbos:
+    image: mysql:5.7
+    volumes:
+      - mysql_storage:/var/lib/mysql
+    restart: always
+    environment: 
+       MYSQL_ROOT_PASSWORD: rootpass
+       MYSQL_USER: vikas
+       MYSQL_PASSWORD: myredhat
+       MYSQL_DATABASE: mydb
+  wordpressos:
+    image: wordpress:5.1.1-php7.3-apache
+    restart: always
+    depends_on:
+       - dbos
+    ports:
+       - 8080:80
+    environment:
+       WORDPRESS_DB_HOST: dbos
+       WORDPRESS_DB_USER: vikas
+       WORDPRESS_DB_PASSWORD: myredhat
+       WORDPRESS_DB_NAME: mydb
+    volumes:
+       - wp_storage:/var/www/html
+
+volumes:                                          //volumes are created if not exist
+  wp_storage:
+  mysql_storage:
+  
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Save annd exit this file
+Now run the command, 
+    >> docker-compose up -d                   // -d to run in background
+It starts the containers with the changes given in the docker-compose.yml file
+
+We can check the running containers using command,
+    >> docker-compose ps
+    
+To stop compose,
+    >> docker-compose stop
+    
+to start compose,
+    >>docker-compose start
+    
+To remove the compose,
+    >> docker-compose rm                      // first stop the compose
+
+To uninstall the docker-compose,
+    rm /usr/local/bin/docker-compose
+    
+    
