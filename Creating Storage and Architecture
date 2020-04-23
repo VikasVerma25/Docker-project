@@ -1,14 +1,16 @@
 We are creating a multi-tier architecture by using a Wordpress image (Front end) and mysql image (Back end).
-As wordpress requires a database to collect and store its records therefore wordpress and mysql provide us a two tier architechure.
-
+As wordpress requires a database to collect and store its records therefore wordpress and mysql provide us a two tier architecture.
+--------------------------------------------------------------------------------------------------------------------------------
 IMAGE FOR MYSQL:
     >> docker pull mysql:5.7
 IMAGE FOR WORDPRESS:
     >> docker pull wordpress:5.1.1-php7.3-apache
+    
 --------------------------------------------------------------------------------------------------------------------------------    
 ENVIRONMENTAL VARIABLES:
 Some containers require to be passed with some data before running them. This data is called Environmental Variable.
 Without passing the environmental variable the container will fail to start.
+
 mysql and wordpress also require such environmental variable.
 We use -e for providing rnvironmental variable.
 
@@ -28,4 +30,25 @@ And we can mount these volume to the containers using -v in docker run command
 
 --------------------------------------------------------------------------------------------------------------------------------
 NOW WE WILL USE DOCKER RUN COMMAND TO RUN A MYSQL CONTAINER,
-    >> docker run -itd -e MYSQL_PASSWORD=  -e MYSQL_USER=  -e MYSQL_PASSWORD=  -e MYSQL_DATABASE=  
+    >> docker run  -itd  -e  MYSQL_ROOT_PASSWORD=rootpass     -e  MYSQL_USER=vikas     -e  MYSQL_PASSWORD=myredhat  
+       -e  MYSQL_DATABASE=mydb      -v  MYSQL_STORAGE:/var/lib/mysql  --name  dbos  mysql:5.7
+
+Data in mysql is stored at location /var/lib/mysql so we mounted a volume to it 
+
+--------------------------------------------------------------------------------------------------------------------------------
+NOW WE WILL RUN A WORDPRESS CONTAINER SIMILARLY AND WILL LINK THE ABOVE 'dbos' CONTAINER TO IT,
+    >> docker run  -itd  -e  WORDPRESS_DB_HOST=dbos     -e  WORDPRESS_DB_USER=vikas     -e  WORDPRESS_DB_PASSWORD=myredhat  
+       -e  WORDPRESS_DB_NAME=mydb       -v  wp_STORAGE:/var/www/html    --name  wpos    -p 8080:80     --link  dbos 
+       wordpress:5.1.1-php7.3-apache
+       
+Wordpress data is stored at /var/www/html so mounted a volume to it.
+We also enabled NATing here with port 8080 so that we can connect to the wordpress container.
+
+--------------------------------------------------------------------------------------------------------------------------------
+WE HAVE DONE IT
+>> NOW IF WE GO TO A BROWSER AND TYPE URL http://<your_IP>:8080/        (we can find the IP by ifconfig command)
+   this will show us the wordpress page and whatever we enter (create blog, comments etc) will be stored in the database(mydb)
+
+
+
+
