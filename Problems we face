@@ -18,4 +18,5 @@ docker-compose also makes it easy to startup multiple containers at the same tim
 some form of networking. The purpose of docker-compose is to function as docker cli but to issue multiple commands much more 
 quickly.
 
-And we can easily share a yml file if we want share the whole infrastructure.
+So, we can easily share a yml file if we want to share the whole infrastructure.
+We will understand about creating the yml or yaml file in the Project.
