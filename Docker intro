@@ -30,5 +30,8 @@ We can link two or more containers using --link in the docker run command
 
 -------------------------------------------------------------------------------------------------------------------------------
 NAT OR PAT:
-We can  enable NATing by conecting a container to a port
+We can  enable NATing by conecting a container to a port so that it will be able connect to the external world
     >> docker container run -it --name <name> -p 8080:80  <image>
+    
+    
+    
