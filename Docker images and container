@@ -1,0 +1,4 @@
+Docker is a tool for containerisation.It can install and boot up an operating system(container here) within seconds.
+
+Obviously, for installing an OS we require an image of that OS. Similary in docker we need to pull images of the containers first.
+
