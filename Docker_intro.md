@@ -1,8 +1,9 @@
+#Docker
 Docker is a tool for containerisation.It can install and boot up an operating system(container here) within seconds.
 Obviously, for installing an OS we require an image of that OS. Similary in docker we need to pull images of the containers first.
 
-----------------------------------------------------------------------------------------------------------------------------------
-PULLING AN IMAGE:
+--------------------------------------------------------------------------------------------------------------------------------
+#PULLING AN IMAGE:
 for pulling an image from the docker repository(docker hub) following command is used,
     >> docker pull <image name>
     
@@ -11,8 +12,8 @@ It will start downloding the image. We can check the downloaded images by,
 
 For removing an image, >> docker rm <image>
 
---------------------------------------------------------------------------------------------------------------------------------
-RUNNING A CONTAINER:
+-------------------------------------------------------------------------------------------------------------------------------
+#RUNNING A CONTAINER:
 for running a container use docker run command,
     >> docker container run -it --name <name> <image>
     
@@ -24,12 +25,12 @@ To start a container, >> docker start <container_name or Id>
 To attach a container, >> docker attach <container_name or Id>
 
 -------------------------------------------------------------------------------------------------------------------------------
-LINKING CONTAINERS:
+#LINKING CONTAINERS:
 We can link two or more containers using --link in the docker run command
     >> docker container run -it --link <container_to_link_with> <image>
 
 -------------------------------------------------------------------------------------------------------------------------------
-NAT OR PAT:
+#NAT OR PAT:
 We can  enable NATing by conecting a container to a port so that it will be able connect to the external world
     >> docker container run -it --name <name> -p 8080:80  <image>
     
