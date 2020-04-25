@@ -1,0 +1,42 @@
+# Here we are using Joomla:latest image,
+# Joomla is a free and open-source content management system (CMS) for publishing web content.
+# To pull the image,  >> docker pull joomla
+
+
+version: '3'
+
+services:
+  
+  dbos:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: vikas
+      MYSQL_PASSWORD: myredhat
+      MYSQL_DATABASE: mydb
+    volumes:
+      - mysql_storage:/var/lib/mysql
+  
+  joomlaos:
+    image: joomla
+    restart: always
+    depends_on:
+      - dbos
+    ports:
+      - 8081:80
+    environment:
+      JOOMLA_DB_HOST: dbos
+      JOOMLA_DB_USER: vikas
+      JOOMLA_DB_NAME: mydb
+      JOOMLA_DB_PASSWORD: myredhat
+    volumes:
+      - joomla_storage:/var/www/html
+      
+volumes:
+  - mysql_storage:
+  - joomla_storage:
+      
+      
+
+  
