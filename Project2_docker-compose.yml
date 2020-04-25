@@ -34,8 +34,8 @@ services:
       - joomla_storage:/var/www/html
       
 volumes:
-  - mysql_storage:
-  - joomla_storage:
+   mysql_storage:
+   joomla_storage:
       
       
 
