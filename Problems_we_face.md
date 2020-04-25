@@ -1,3 +1,4 @@
+# DOING MANUALLY:
 We successfully created a multi-tier architecture using the docker run command. 
 BUT whatever we have done is manually.
 
@@ -7,6 +8,7 @@ For that we will need to AGAIN RUN those commands and launch the containers whic
 Also we will not be able to share the complete infrastructure, if we want, as we will need to do these things again.
 
 ----------------------------------------------------------------------------------------------------------------------------------
+# DOCKER-COMPOSE:
 To solve this we have DOCKER-COMPOSE
 
 We can do all those things very easily and effectively using docker-compose.
