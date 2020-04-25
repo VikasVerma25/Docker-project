@@ -1,0 +1,31 @@
+# This is another infrastructure as code(docker-compose) example
+# Here we are using concrete5.7 image and connecting it to the mysql database 
+
+# Concrete5 is an easy to use web content management system. Concrete5 was designed for ease of use, for users with a minimum 
+# of technical skills. It features in-context editing (the ability to edit website content directly on the page, rather than 
+# in an administrative interface)
+
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_USER: vikas
+      MYSQL_PASSWORD: myredhat
+      MYSQL_DATABASE: mydb
+    volumes:
+      - my_storage:/var/lib/mysql
+  concreteos:
+    image: chriswayg/concrete5.7
+    restart: always
+    ports:
+      - 8082:80
+    depends_on:
+      - db
+    volumes:
+      - concrete_storage:/var/www/html
+volumes:
+  my_storage:
+  concrete_storage:
